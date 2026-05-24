@@ -9,7 +9,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-* { margin:0; padding:0; box-sizing:border-box; scroll-behavior:smooth; }
+* {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  scroll-behavior:smooth;
+}
 
 body {
   font-family:'Inter', sans-serif;
@@ -17,53 +22,6 @@ body {
   color:white;
   overflow-x:hidden;
   user-select:none;
-}
-
-nav {
-  position:fixed;
-  top:0;
-  width:100%;
-  padding:18px;
-  background:rgba(0,0,0,0.7);
-  backdrop-filter:blur(10px);
-  display:flex;
-  justify-content:center;
-  gap:20px;
-  z-index:999;
-}
-
-nav a { color:white; text-decoration:none; }
-
-#lockscreen {
-  position:fixed;
-  inset:0;
-  background:black;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  z-index:999999;
-}
-
-#lockscreen input {
-  padding:14px;
-  width:260px;
-  margin:10px;
-  border-radius:10px;
-  border:none;
-}
-
-#lockscreen button {
-  padding:12px 20px;
-  border:none;
-  border-radius:10px;
-  background:linear-gradient(135deg,#ff4d6d,#ff758f);
-  color:white;
-  cursor:pointer;
-}
-
-#app {
-  display:none;
 }
 
 section {
@@ -75,6 +33,7 @@ section {
   position:relative;
   background-size:cover;
   background-position:center;
+  background-attachment:fixed;
 }
 
 section::before {
@@ -82,6 +41,7 @@ section::before {
   position:absolute;
   inset:0;
   background:rgba(0,0,0,0.65);
+  backdrop-filter:blur(3px);
 }
 
 .content {
@@ -89,33 +49,144 @@ section::before {
   z-index:2;
   max-width:900px;
   background:rgba(20,20,20,0.75);
-  padding:50px;
+  border:1px solid rgba(255,255,255,0.08);
   border-radius:24px;
+  padding:50px;
+  box-shadow:0 0 40px rgba(0,0,0,0.5);
+}
+
+h1 { font-size:4rem; margin-bottom:20px; }
+h2 { font-size:3rem; margin-bottom:12px; }
+h3 { color:#ff4d6d; margin-bottom:25px; font-size:1.2rem; }
+
+p {
+  font-size:1.1rem;
+  line-height:1.9;
+  color:#d8d8d8;
+  margin-bottom:20px;
 }
 
 .audio-btn {
-  margin-top:20px;
-  padding:14px 24px;
-  border:none;
-  border-radius:40px;
+  margin-top:25px;
   background:linear-gradient(135deg,#ff4d6d,#ff758f);
+  border:none;
+  padding:14px 24px;
+  border-radius:50px;
   color:white;
   cursor:pointer;
+  font-weight:600;
+}
+
+nav {
+  position:fixed;
+  top:0;
+  width:100%;
+  padding:18px 30px;
+  background:rgba(0,0,0,0.7);
+  backdrop-filter:blur(10px);
+  z-index:999;
+  display:flex;
+  justify-content:center;
+  gap:20px;
+}
+
+nav a {
+  color:white;
+  text-decoration:none;
+  font-size:0.9rem;
+}
+
+footer {
+  background:#000;
+  padding:40px;
+  text-align:center;
+  color:#888;
+}
+
+/* ================= LOGIN ================= */
+
+#authOverlay {
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle at center, #111 0%, #000 100%);
+  z-index:999999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.auth-box {
+  width:420px;
+  background:rgba(15,15,15,0.95);
+  padding:40px;
+  border-radius:24px;
+  border:1px solid rgba(255,255,255,0.08);
+  text-align:center;
+  box-shadow:0 0 40px rgba(0,0,0,0.8);
+}
+
+.auth-box h1 {
+  font-size:2rem;
+  margin-bottom:10px;
+}
+
+.auth-box p {
+  color:#aaa;
+  margin-bottom:20px;
+  font-size:0.9rem;
+}
+
+.auth-box input {
+  width:100%;
+  padding:14px;
+  margin-bottom:14px;
+  border-radius:12px;
+  border:none;
+  background:#1b1b1b;
+  color:white;
+  font-size:1rem;
+  outline:none;
+}
+
+.auth-box input:focus {
+  border:1px solid #ff4d6d;
+}
+
+.auth-box button {
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  background:linear-gradient(135deg,#ff4d6d,#ff758f);
+  color:white;
+  font-size:1rem;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.auth-box button:hover {
+  transform:scale(1.02);
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOCK SCREEN -->
-<div id="lockscreen">
-  <h2>Vault Locked</h2>
-  <input type="password" id="password" placeholder="Enter Password">
-  <button onclick="unlock()">Unlock</button>
+<!-- LOGIN -->
+<div id="authOverlay">
+  <div class="auth-box">
+    <h1>Member Access</h1>
+    <p>Enter credentials to unlock the playlist</p>
+
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+
+    <button onclick="login()">Login</button>
+  </div>
 </div>
 
-<!-- APP -->
-<div id="app">
+<!-- SITE -->
+<div id="siteContent" style="display:none;">
 
 <nav>
   <a href="#home">Home</a>
@@ -125,129 +196,119 @@ section::before {
   <a href="#ozzy">Ozzy</a>
 </nav>
 
-<div id="content"></div>
+<section id="home" style="background-image:url('images/home.jpg')">
+  <div class="content">
+    <h1>Essential 80s Metal Playlist</h1>
+    <h3>Glam Metal • Hard Rock • Heavy Metal</h3>
+    <p>1980s rock evolution through riffs, attitude, and chaos.</p>
+    <button class="audio-btn" onclick="playSong('audio/nightsongs.mp3')">♫ Play</button>
+  </div>
+</section>
+
+<section id="motley" style="background-image:url('images/motley.jpg')">
+  <div class="content">
+    <h2>Mötley Crüe</h2>
+    <button class="audio-btn" onclick="playSong('audio/merrygoround.mp3')">♫ Play</button>
+  </div>
+</section>
+
+<section id="metallica" style="background-image:url('images/metallica.jpg')">
+  <div class="content">
+    <h2>Metallica</h2>
+    <button class="audio-btn" onclick="playSong('audio/seekdestroy.mp3')">♫ Play</button>
+  </div>
+</section>
+
+<section id="poison" style="background-image:url('images/poison.jpg')">
+  <div class="content">
+    <h2>Poison</h2>
+    <button class="audio-btn" onclick="playSong('audio/crytough.mp3')">♫ Play</button>
+  </div>
+</section>
+
+<section id="ozzy" style="background-image:url('images/ozzy.jpg')">
+  <div class="content">
+    <h2>Ozzy Osbourne</h2>
+    <button class="audio-btn" onclick="playSong('audio/shotinthedark.mp3')">♫ Play</button>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Essential 80s Metal Playlist</p>
+</footer>
 
 </div>
 
 <script>
-/* =========================
-   ENCRYPTED VAULT DATA
-   =========================
-   Replace this with your generated encrypted string
-*/
-const ENCRYPTED_PAYLOAD = "vTAuMm5mmdtuvJMGFsZiVzMVBHuh1ppV8wBxeeQBSXpUUk9lRbEpavMyzFnseCH/1ZGWv7rkH9Fwm8zcxR5iTFAn95z/1wCwvf/T/Fs3/DJgl0cqrEPGhHf2CbhH3Lke8ZRf68fYHwSjFqTdQImLvTx6oPFn5I16dnZwcpmvjq6uzXWGVkS9oaEnG6rMLj2QvVf8OwAqM0qb9z+hCV62sFRa2mFY8B1kb1jlgUStd0zAgsdxcxvd5gcllnoCbKK6krWF7V1hekNtnU2vrAwiIJUC3BhjqCaleXJa7mzYVrXLjkZauOjtOfb8V0nCBYabbb0bS18001M1NnpzkGEhYwa5ktRugTAd+hF4yIgzwfBmMzNHS943RJ9OeeDShRi1UetOAejLT3D+jBaif6R1TPbLkNqf0fq/NigMX03d0X+PFbkawoBT5jQylX6n/rdYkY4nNoqaAzEMEL0SkweswISBHhDewiwbVut322qj VM35:14";
+/* ================= USERS ================= */
 
-/* =========================
-   CRYPTO ENGINE
-   ========================= */
+const USERS = {
+  "admin": "root",
+  "kaiden": "tinka",
+  "mcneill": "culminating",
+  "tommylee": "motleycru3"
+};
 
-function b64ToBytes(b64) {
-  return Uint8Array.from(atob(b64), c => c.charCodeAt(0));
-}
+/* ================= LOGIN ================= */
 
-async function deriveKey(password, salt) {
-  const enc = new TextEncoder();
-
-  const keyMaterial = await crypto.subtle.importKey(
-    "raw",
-    enc.encode(password),
-    "PBKDF2",
-    false,
-    ["deriveKey"]
-  );
-
-  return crypto.subtle.deriveKey(
-    {
-      name: "PBKDF2",
-      salt,
-      iterations: 100000,
-      hash: "SHA-256"
-    },
-    keyMaterial,
-    { name: "AES-GCM", length: 256 },
-    false,
-    ["decrypt"]
-  );
-}
-
-async function decryptVault(password) {
-  const raw = b64ToBytes(ENCRYPTED_PAYLOAD);
-
-  const salt = raw.slice(0,16);
-  const iv = raw.slice(16,28);
-  const data = raw.slice(28);
-
-  const key = await deriveKey(password, salt);
-
-  const decrypted = await crypto.subtle.decrypt(
-    { name:"AES-GCM", iv },
-    key,
-    data
-  );
-
-  return JSON.parse(new TextDecoder().decode(decrypted));
-}
-
-/* =========================
-   UI
-   ========================= */
-
-async function unlock() {
+function login() {
+  const user = document.getElementById("username").value.trim().toLowerCase();
   const pass = document.getElementById("password").value;
 
-  try {
-    const data = await decryptVault(pass);
-
-    sessionStorage.setItem("unlocked","1");
-
-    document.getElementById("lockscreen").style.display = "none";
-    document.getElementById("app").style.display = "block";
-
-    render(data);
-
-  } catch (e) {
-    alert("Wrong password");
+  if (USERS[user] && USERS[user] === pass) {
+    sessionStorage.setItem("authUser", user);
+    unlock();
+  } else {
+    location.reload(); // hard reset on fail
   }
 }
 
-function render(data) {
-  const container = document.getElementById("content");
-
-  let html = "";
-
-  for (const s of data.sections) {
-    html += `
-      <section id="${s.id}" style="background-image:url('${s.bg}')">
-        <div class="content">
-          <h2>${s.title}</h2>
-          <p>${s.desc}</p>
-          <button class="audio-btn" onclick="playSong('${s.audio}')">
-            ♫ Play
-          </button>
-        </div>
-      </section>
-    `;
-  }
-
-  container.innerHTML = html;
+function unlock() {
+  document.getElementById("authOverlay").style.display = "none";
+  document.getElementById("siteContent").style.display = "block";
 }
 
-/* audio */
-let current = null;
+/* auto session restore */
+function checkAuth() {
+  const user = sessionStorage.getItem("authUser");
+
+  if (USERS[user]) {
+    unlock();
+  } else {
+    location.reload();
+  }
+}
+
+/* ================= AUDIO ================= */
+
+let currentAudio = null;
+
 function playSong(src) {
-  if (current) {
-    current.pause();
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
   }
-  current = new Audio(src);
-  current.volume = 0.5;
-  current.play();
+
+  currentAudio = new Audio(src);
+  currentAudio.volume = 0.5;
+  currentAudio.play();
 }
 
-/* session restore */
-if (sessionStorage.getItem("unlocked") === "1") {
-  document.getElementById("lockscreen").style.display = "none";
-  document.getElementById("app").style.display = "block";
-}
+/* ================= BASIC ANTI-OPEN ================= */
+
+document.addEventListener("contextmenu", e => e.preventDefault());
+
+document.addEventListener("keydown", function(e) {
+  if (
+    e.key === "F12" ||
+    (e.ctrlKey && e.shiftKey && ["I","J","C"].includes(e.key)) ||
+    (e.ctrlKey && e.key === "u")
+  ) {
+    e.preventDefault();
+  }
+});
+
+checkAuth();
 </script>
 
 </body>
