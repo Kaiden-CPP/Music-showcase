@@ -1,287 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Essential 80s Metal Playlist</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Essential 80s Metal Playlist</title>
 
-  <link rel="icon" type="image/png" href="favicon.png">
+<link rel="icon" type="image/png" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; scroll-behavior:smooth; }
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
+body {
+  font-family:'Inter', sans-serif;
+  background:#0d0d0d;
+  color:white;
+  overflow-x:hidden;
+  user-select:none;
+}
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #0d0d0d;
-      color: white;
-      overflow-x: hidden;
-      user-select: none;
-      -webkit-user-select: none;
-    }
+nav {
+  position:fixed;
+  top:0;
+  width:100%;
+  padding:18px;
+  background:rgba(0,0,0,0.7);
+  backdrop-filter:blur(10px);
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  z-index:999;
+}
 
-    section {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 60px;
-      position: relative;
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-    }
+nav a { color:white; text-decoration:none; }
 
-    section::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.65);
-      backdrop-filter: blur(3px);
-    }
+#lockscreen {
+  position:fixed;
+  inset:0;
+  background:black;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  z-index:999999;
+}
 
-    .content {
-      position: relative;
-      z-index: 2;
-      max-width: 900px;
-      background: rgba(20,20,20,0.75);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 24px;
-      padding: 50px;
-      box-shadow: 0 0 40px rgba(0,0,0,0.5);
-      animation: fadeIn 1.2s ease;
-    }
+#lockscreen input {
+  padding:14px;
+  width:260px;
+  margin:10px;
+  border-radius:10px;
+  border:none;
+}
 
-    h1 {
-      font-size: 4rem;
-      margin-bottom: 20px;
-      font-weight: 700;
-      letter-spacing: -2px;
-    }
+#lockscreen button {
+  padding:12px 20px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(135deg,#ff4d6d,#ff758f);
+  color:white;
+  cursor:pointer;
+}
 
-    h2 {
-      font-size: 3rem;
-      margin-bottom: 12px;
-      font-weight: 700;
-    }
+#app {
+  display:none;
+}
 
-    h3 {
-      color: #ff4d6d;
-      margin-bottom: 25px;
-      font-size: 1.2rem;
-      font-weight: 400;
-    }
+section {
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:60px;
+  position:relative;
+  background-size:cover;
+  background-position:center;
+}
 
-    p {
-      font-size: 1.1rem;
-      line-height: 1.9;
-      color: #d8d8d8;
-      margin-bottom: 20px;
-    }
+section::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.65);
+}
 
-    ul {
-      margin-top: 20px;
-      padding-left: 20px;
-    }
+.content {
+  position:relative;
+  z-index:2;
+  max-width:900px;
+  background:rgba(20,20,20,0.75);
+  padding:50px;
+  border-radius:24px;
+}
 
-    li {
-      margin-bottom: 12px;
-      color: #f0f0f0;
-    }
-
-    .audio-btn {
-      margin-top: 25px;
-      background: linear-gradient(135deg, #ff4d6d, #ff758f);
-      border: none;
-      padding: 14px 24px;
-      border-radius: 50px;
-      color: white;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: 0.3s ease;
-      font-weight: 600;
-    }
-
-    .audio-btn:hover {
-      transform: scale(1.05);
-      opacity: 0.9;
-    }
-
-    .credit {
-      margin-top: 14px;
-      font-size: 0.9rem;
-      color: #aaaaaa;
-    }
-
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      padding: 18px 30px;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(10px);
-      z-index: 999;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: 0.3s;
-    }
-
-    nav a:hover {
-      color: #ff4d6d;
-    }
-
-    footer {
-      background: #000;
-      padding: 40px;
-      text-align: center;
-      color: #888;
-    }
-
-    footer a {
-      color: #ff4d6d;
-      text-decoration: none;
-    }
-
-    #authOverlay {
-      position: fixed;
-      inset: 0;
-      background: #000;
-      z-index: 999999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .auth-box {
-      width: 420px;
-      background: rgba(15,15,15,0.95);
-      padding: 40px;
-      border-radius: 24px;
-      border: 1px solid rgba(255,255,255,0.08);
-      text-align: center;
-      box-shadow: 0 0 40px rgba(0,0,0,0.6);
-    }
-
-    .auth-box input {
-      width: 100%;
-      padding: 14px;
-      margin-bottom: 14px;
-      border-radius: 12px;
-      border: none;
-      background: #1b1b1b;
-      color: white;
-      font-size: 1rem;
-    }
-
-    .auth-box button {
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 12px;
-      background: linear-gradient(135deg,#ff4d6d,#ff758f);
-      color: white;
-      font-size: 1rem;
-      cursor: pointer;
-      margin-top: 8px;
-    }
-
-    .watermark {
-      position: fixed;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 80px;
-      opacity: 0.03;
-      pointer-events: none;
-      transform: rotate(-30deg);
-      z-index: 1;
-    }
-
-    #eulaModal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.85);
-      z-index: 9999999;
-      overflow: auto;
-    }
-
-    .eula-content {
-      max-width: 900px;
-      margin: 60px auto;
-      background: #111;
-      padding: 40px;
-      border-radius: 20px;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @media(max-width:900px) {
-      h1 {
-        font-size: 2.5rem;
-      }
-
-      h2 {
-        font-size: 2rem;
-      }
-
-      .content {
-        padding: 30px;
-      }
-
-      section {
-        padding: 20px;
-      }
-    }
-  </style>
+.audio-btn {
+  margin-top:20px;
+  padding:14px 24px;
+  border:none;
+  border-radius:40px;
+  background:linear-gradient(135deg,#ff4d6d,#ff758f);
+  color:white;
+  cursor:pointer;
+}
+</style>
 </head>
 
 <body>
 
-<div class="watermark">
-  LICENSED ACCESS
+<!-- LOCK SCREEN -->
+<div id="lockscreen">
+  <h2>Vault Locked</h2>
+  <input type="password" id="password" placeholder="Enter Password">
+  <button onclick="unlock()">Unlock</button>
 </div>
 
-<div id="authOverlay">
-  <div class="auth-box">
-    <h1>Member Access</h1>
-
-    <p style="margin-bottom:20px;color:#aaa;">
-      Sign in to access the licensed playlist experience.
-    </p>
-
-    <input type="email" id="email" placeholder="Email">
-    <input type="password" id="password" placeholder="Password">
-
-    <button onclick="login()">Login</button>
-    <button onclick="signup()">Create Account</button>
-  </div>
-</div>
+<!-- APP -->
+<div id="app">
 
 <nav>
   <a href="#home">Home</a>
@@ -291,220 +125,129 @@
   <a href="#ozzy">Ozzy</a>
 </nav>
 
-<section id="home" style="background-image:url('images/home.jpg')">
-  <div class="content">
-    <h1>Essential 80s Metal Playlist</h1>
+<div id="content"></div>
 
-    <h3>Glam Metal • Hard Rock • Heavy Metal</h3>
-
-    <p>
-      The 1980s transformed rock music forever through glam metal,
-      heavy riffs and unforgettable stage presence.
-    </p>
-
-    <button class="audio-btn" onclick="playSong('audio/nightsongs.mp3')">
-      ♫ Click to Listen
-    </button>
-
-    <div class="credit">
-      Night Songs — Cinderella (1986)
-    </div>
-  </div>
-</section>
-
-<section id="motley" style="background-image:url('images/motley.jpg')">
-  <div class="content">
-    <h2>Mötley Crüe — Merry-Go-Round</h2>
-
-    <h3>1981 • Too Fast for Love</h3>
-
-    <p>
-      One of the darker and more emotional early glam metal tracks.
-    </p>
-
-    <button class="audio-btn" onclick="playSong('audio/merrygoround.mp3')">
-      ♫ Click to Listen
-    </button>
-  </div>
-</section>
-
-<section id="metallica" style="background-image:url('images/metallica.jpg')">
-  <div class="content">
-    <h2>Metallica — Seek and Destroy</h2>
-
-    <h3>1983 • Kill 'Em All</h3>
-
-    <p>
-      Aggressive thrash metal energy that changed heavy music forever.
-    </p>
-
-    <button class="audio-btn" onclick="playSong('audio/seekdestroy.mp3')">
-      ♫ Click to Listen
-    </button>
-  </div>
-</section>
-
-<section id="poison" style="background-image:url('images/poison.jpg')">
-  <div class="content">
-    <h2>Poison — Cry Tough</h2>
-
-    <h3>1986 • Look What the Cat Dragged In</h3>
-
-    <p>
-      A defining Sunset Strip glam metal anthem.
-    </p>
-
-    <button class="audio-btn" onclick="playSong('audio/crytough.mp3')">
-      ♫ Click to Listen
-    </button>
-  </div>
-</section>
-
-<section id="ozzy" style="background-image:url('images/ozzy.jpg')">
-  <div class="content">
-    <h2>Ozzy Osbourne — Shot in the Dark</h2>
-
-    <h3>1986 • The Ultimate Sin</h3>
-
-    <p>
-      Dark atmosphere mixed with massive hooks and classic heavy metal energy.
-    </p>
-
-    <button class="audio-btn" onclick="playSong('audio/shotinthedark.mp3')">
-      ♫ Click to Listen
-    </button>
-  </div>
-</section>
-
-<footer>
-  <p>© 2026 Essential 80s Metal Playlist</p>
-
-  <p style="margin-top:10px;">
-    Unauthorized reproduction, redistribution, scraping,
-    or resale of this website or its assets is prohibited.
-  </p>
-
-  <p style="margin-top:14px;">
-    <a href="#" onclick="openEULA()">
-      End User License Agreement
-    </a>
-  </p>
-</footer>
-
-<div id="eulaModal">
-  <div class="eula-content">
-
-    <h1 style="font-size:2rem;margin-bottom:20px;">
-      END USER LICENSE AGREEMENT
-    </h1>
-
-    <p>
-      By accessing this website, you agree not to reproduce,
-      redistribute, scrape, reverse engineer, or commercially
-      exploit any portion of this website without permission.
-    </p>
-
-    <p>
-      All code, branding, media, and design elements are protected
-      under applicable copyright law.
-    </p>
-
-    <p>
-      Access may be revoked at any time for violations of these terms.
-    </p>
-
-    <button class="audio-btn" onclick="closeEULA()">
-      Close
-    </button>
-
-  </div>
 </div>
 
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-
 <script>
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  appId: "YOUR_APP_ID"
-};
+/* =========================
+   ENCRYPTED VAULT DATA
+   =========================
+   Replace this with your generated encrypted string
+*/
+const ENCRYPTED_PAYLOAD = "PASTE_YOUR_ENCRYPTED_BASE64_HERE";
 
-firebase.initializeApp(firebaseConfig);
+/* =========================
+   CRYPTO ENGINE
+   ========================= */
 
-const auth = firebase.auth();
-
-function signup() {
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
-
-  auth.createUserWithEmailAndPassword(email, password)
-    .then(() => {
-      alert("Account created.");
-    })
-    .catch(error => {
-      alert(error.message);
-    });
+function b64ToBytes(b64) {
+  return Uint8Array.from(atob(b64), c => c.charCodeAt(0));
 }
 
-function login() {
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
+async function deriveKey(password, salt) {
+  const enc = new TextEncoder();
 
-  auth.signInWithEmailAndPassword(email, password)
-    .then(() => {
-      document.getElementById('authOverlay').style.display = 'none';
-    })
-    .catch(error => {
-      alert(error.message);
-    });
+  const keyMaterial = await crypto.subtle.importKey(
+    "raw",
+    enc.encode(password),
+    "PBKDF2",
+    false,
+    ["deriveKey"]
+  );
+
+  return crypto.subtle.deriveKey(
+    {
+      name: "PBKDF2",
+      salt,
+      iterations: 100000,
+      hash: "SHA-256"
+    },
+    keyMaterial,
+    { name: "AES-GCM", length: 256 },
+    false,
+    ["decrypt"]
+  );
 }
 
-auth.onAuthStateChanged(user => {
-  if (user) {
-    document.getElementById('authOverlay').style.display = 'none';
-  } else {
-    document.getElementById('authOverlay').style.display = 'flex';
+async function decryptVault(password) {
+  const raw = b64ToBytes(ENCRYPTED_PAYLOAD);
+
+  const salt = raw.slice(0,16);
+  const iv = raw.slice(16,28);
+  const data = raw.slice(28);
+
+  const key = await deriveKey(password, salt);
+
+  const decrypted = await crypto.subtle.decrypt(
+    { name:"AES-GCM", iv },
+    key,
+    data
+  );
+
+  return JSON.parse(new TextDecoder().decode(decrypted));
+}
+
+/* =========================
+   UI
+   ========================= */
+
+async function unlock() {
+  const pass = document.getElementById("password").value;
+
+  try {
+    const data = await decryptVault(pass);
+
+    sessionStorage.setItem("unlocked","1");
+
+    document.getElementById("lockscreen").style.display = "none";
+    document.getElementById("app").style.display = "block";
+
+    render(data);
+
+  } catch (e) {
+    alert("Wrong password");
   }
-});
+}
 
-let currentAudio = null;
+function render(data) {
+  const container = document.getElementById("content");
 
-function playSong(songPath) {
-  if (currentAudio) {
-    currentAudio.pause();
-    currentAudio.currentTime = 0;
+  let html = "";
+
+  for (const s of data.sections) {
+    html += `
+      <section id="${s.id}" style="background-image:url('${s.bg}')">
+        <div class="content">
+          <h2>${s.title}</h2>
+          <p>${s.desc}</p>
+          <button class="audio-btn" onclick="playSong('${s.audio}')">
+            ♫ Play
+          </button>
+        </div>
+      </section>
+    `;
   }
 
-  currentAudio = new Audio(songPath);
-  currentAudio.volume = 0.5;
-  currentAudio.play();
+  container.innerHTML = html;
 }
 
-function openEULA() {
-  document.getElementById('eulaModal').style.display = 'block';
-}
-
-function closeEULA() {
-  document.getElementById('eulaModal').style.display = 'none';
-}
-
-document.addEventListener('contextmenu', e => e.preventDefault());
-
-document.addEventListener('keydown', function(e) {
-  if (
-    e.key === 'F12' ||
-    (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key)) ||
-    (e.ctrlKey && e.key === 'u')
-  ) {
-    e.preventDefault();
+/* audio */
+let current = null;
+function playSong(src) {
+  if (current) {
+    current.pause();
   }
-});
+  current = new Audio(src);
+  current.volume = 0.5;
+  current.play();
+}
 
-document.querySelectorAll('img').forEach(img => {
-  img.addEventListener('dragstart', e => e.preventDefault());
-});
+/* session restore */
+if (sessionStorage.getItem("unlocked") === "1") {
+  document.getElementById("lockscreen").style.display = "none";
+  document.getElementById("app").style.display = "block";
+}
 </script>
 
 </body>
