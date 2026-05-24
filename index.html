@@ -1,280 +1,575 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Essential 80s Metal Playlist</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Essential 80s Metal Playlist</title>
+  <link rel='icon' type="image/png" href="favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
 
-<link rel="icon" type="image/png" href="favicon.png">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0d0d0d;
+      color: white;
+      overflow-x: hidden;
+    }
 
-<style>
-* {
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  scroll-behavior:smooth;
-}
+    section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
 
-body {
-  font-family:'Inter', sans-serif;
-  background:#0d0d0d;
-  color:white;
-  overflow-x:hidden;
-}
+    section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      backdrop-filter: blur(3px);
+    }
 
-/* LOGIN */
-#authOverlay {
-  position:fixed;
-  inset:0;
-  background:radial-gradient(circle, #111, #000);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:999999;
-}
+    .content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      background: rgba(20,20,20,0.75);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 50px;
+      box-shadow: 0 0 40px rgba(0,0,0,0.5);
+      animation: fadeIn 1.2s ease;
+    }
 
-.auth-box {
-  width:420px;
-  padding:40px;
-  border-radius:20px;
-  background:rgba(15,15,15,0.95);
-  border:1px solid rgba(255,255,255,0.08);
-  text-align:center;
-}
+    h1 {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+      letter-spacing: -2px;
+    }
 
-.auth-box h1 {
-  font-size:2rem;
-  margin-bottom:10px;
-}
+    h2 {
+      font-size: 3rem;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
 
-.auth-box input {
-  width:100%;
-  padding:14px;
-  margin:10px 0;
-  border-radius:12px;
-  border:none;
-  background:#1b1b1b;
-  color:white;
-  outline:none;
-}
+    h3 {
+      color: #ff4d6d;
+      margin-bottom: 25px;
+      font-size: 1.2rem;
+      font-weight: 400;
+    }
 
-.auth-box button {
-  width:100%;
-  padding:14px;
-  border:none;
-  border-radius:12px;
-  background:linear-gradient(135deg,#ff4d6d,#ff758f);
-  color:white;
-  cursor:pointer;
-  font-weight:600;
-}
+    p {
+      font-size: 1.1rem;
+      line-height: 1.9;
+      color: #d8d8d8;
+      margin-bottom: 20px;
+    }
 
-/* SITE */
-#siteContent {
-  display:none;
-}
+    ul {
+      margin-top: 20px;
+      padding-left: 20px;
+    }
 
-/* NAV */
-nav {
-  position:fixed;
-  top:0;
-  width:100%;
-  padding:18px;
-  background:rgba(0,0,0,0.7);
-  backdrop-filter:blur(10px);
-  display:flex;
-  justify-content:center;
-  gap:20px;
-  z-index:999;
-}
+    li {
+      margin-bottom: 12px;
+      color: #f0f0f0;
+    }
 
-nav a {
-  color:white;
-  text-decoration:none;
-  font-size:0.9rem;
-}
+    .audio-btn {
+      margin-top: 25px;
+      background: linear-gradient(135deg, #ff4d6d, #ff758f);
+      border: none;
+      padding: 14px 24px;
+      border-radius: 50px;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s ease;
+      font-weight: 600;
+    }
 
-/* SECTIONS */
-section {
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:60px;
-  position:relative;
-  background-size:cover;
-  background-position:center;
-  background-attachment:fixed;
-}
+    .audio-btn:hover {
+      transform: scale(1.05);
+      opacity: 0.9;
+    }
 
-section::before {
-  content:"";
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,0.65);
-}
+    .credit {
+      margin-top: 14px;
+      font-size: 0.9rem;
+      color: #aaaaaa;
+    }
 
-.content {
-  position:relative;
-  z-index:2;
-  max-width:900px;
-  background:rgba(20,20,20,0.75);
-  border:1px solid rgba(255,255,255,0.08);
-  border-radius:24px;
-  padding:50px;
-}
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 18px 30px;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(10px);
+      z-index: 999;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
 
-.audio-btn {
-  margin-top:20px;
-  padding:14px 24px;
-  border:none;
-  border-radius:50px;
-  background:linear-gradient(135deg,#ff4d6d,#ff758f);
-  color:white;
-  cursor:pointer;
-  font-weight:600;
-}
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: 0.3s;
+    }
 
-footer {
-  background:#000;
-  padding:40px;
-  text-align:center;
-  color:#888;
-}
-</style>
+    nav a:hover {
+      color: #ff4d6d;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media(max-width: 900px) {
+      h1 {
+        font-size: 2.8rem;
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      section {
+        padding: 20px;
+      }
+
+      .content {
+        padding: 30px;
+      }
+    }
+  </style>
 </head>
-
 <body>
-
-<!-- LOGIN -->
-<div id="authOverlay">
-  <div class="auth-box">
-    <h1>Member Access</h1>
-
-    <input type="text" id="username" placeholder="Username">
-    <input type="password" id="password" placeholder="Password">
-
-    <button onclick="login()">Login</button>
-  </div>
-</div>
-
-<!-- SITE -->
-<div id="siteContent">
 
 <nav>
   <a href="#home">Home</a>
   <a href="#motley">Mötley Crüe</a>
+  <a href="#hanoi">Hanoi Rocks</a>
+  <a href="#vanhalen">Van Halen</a>
   <a href="#metallica">Metallica</a>
   <a href="#poison">Poison</a>
+  <a href="#kix">Kix</a>
+  <a href="#warrant">Warrant</a>
+  <a href="#steelheart">SteelHeart</a>
   <a href="#ozzy">Ozzy</a>
+  <a href="#zeppelin">Led Zeppelin</a>
 </nav>
 
 <section id="home" style="background-image:url('images/home.jpg')">
   <div class="content">
     <h1>Essential 80s Metal Playlist</h1>
-    <button class="audio-btn" onclick="playSong('audio/nightsongs.mp3')">Play</button>
+    <h3>Glam Metal • Hard Rock • Heavy Metal</h3>
+
+    <p>
+      The 1980s marked a major evolution in popular music with the rise of glam metal,
+      blending heavy guitar riffs, pop melodies, flamboyant fashion and unforgettable hooks.
+      Bands like Mötley Crüe, Poison and Cinderella transformed hard rock into a global movement.
+    </p>
+
+    <p>
+      Beyond entertainment, these artists represented rebellion, individuality and larger-than-life performance.
+      Their music continues to influence modern rock and remains essential to understanding the evolution of heavy music.
+    </p>
+
+    <button class="audio-btn" onclick="playSong('audio/nightsongs.mp3')">
+      ♫ Click to Listen
+    </button>
+
+    <div class="credit">
+      Night Songs — Cinderella (1986)
+    </div>
   </div>
 </section>
 
 <section id="motley" style="background-image:url('images/motley.jpg')">
   <div class="content">
-    <h2>Mötley Crüe</h2>
-    <button class="audio-btn" onclick="playSong('audio/merrygoround.mp3')">Play</button>
+    <h2>Mötley Crüe — Merry-Go-Round</h2>
+    <h3>1981 • Too Fast for Love</h3>
+
+    <p>
+      "Merry-Go-Round" revealed an emotional and reflective side of Mötley Crüe before the band became global superstars.
+      Combining haunting melodies with raw glam metal energy, the song stood apart from the band's wild reputation.
+    </p>
+
+    <ul>
+      <li>Emotional storytelling</li>
+      <li>Dark atmospheric guitar work</li>
+      <li>Early example of glam metal depth</li>
+      <li>Helped establish the Sunset Strip sound</li>
+    </ul>
+
+    <button class="audio-btn" onclick="playSong('audio/merrygoround.mp3')">
+      ♫ Click to Listen
+    </button>
+
+    <div class="credit">
+      Merry-Go-Round — Mötley Crüe (1981)
+    </div>
+  </div>
+</section>
+
+<section id="hanoi" style="background-image:url('images/hanoi.jpg')">
+  <div class="content">
+    <h2>Hanoi Rocks — Don't You Ever Leave Me</h2>
+    <h3>1983 • Back to Mystery City</h3>
+
+    <p>
+      Hanoi Rocks fused glam rock, punk attitude and dangerous energy into a sound that heavily influenced future hair metal bands.
+      Their style and swagger shaped the image of 1980s glam before the genre exploded commercially.
+    </p>
+
+    <ul>
+      <li>Catchy hooks and gritty guitar tones</li>
+      <li>Strong punk influence</li>
+      <li>Inspired Guns N' Roses and many glam bands</li>
+      <li>Cult status after the death of drummer Razzle</li>
+    </ul>
+
+    <button class="audio-btn" onclick="playSong('audio/hanoi.mp3')">
+      ♫ Click to Listen
+    </button>
+
+    <div class="credit">
+      Don't You Ever Leave Me — Hanoi Rocks (1983)
+    </div>
+  </div>
+</section>
+
+<section id="vanhalen" style="background-image:url('images/vanhalen.jpg')">
+  <div class="content">
+    <h2>Van Halen — Runnin' with the Devil</h2>
+    <h3>1978 • Van Halen</h3>
+
+    <p>
+      Although released in the late 1970s, this track laid the groundwork for the guitar-driven excess of the 1980s.
+      Eddie Van Halen's revolutionary playing style changed rock music forever.
+    </p>
+
+    <ul>
+      <li>Innovative guitar techniques</li>
+      <li>High-energy performance style</li>
+      <li>Blueprint for shred guitar</li>
+      <li>Redefined hard rock showmanship</li>
+    </ul>
+
+    <button class="audio-btn" onclick="playSong('audio/runnin.mp3')">
+      ♫ Click to Listen
+    </button>
+
+    <div class="credit">
+      Runnin' with the Devil — Van Halen (1978)
+    </div>
   </div>
 </section>
 
 <section id="metallica" style="background-image:url('images/metallica.jpg')">
   <div class="content">
-    <h2>Metallica</h2>
-    <button class="audio-btn" onclick="playSong('audio/seekdestroy.mp3')">Play</button>
+    <h2>Metallica — Seek and Destroy</h2>
+    <h3>1983 • Kill 'Em All</h3>
+
+    <p>
+      "Seek and Destroy" introduced the raw aggression of thrash metal to a new generation.
+      Its speed, intensity and rebellious spirit contrasted sharply with polished pop-metal bands of the era.
+    </p>
+
+    <ul>
+      <li>Fast, aggressive riffing</li>
+      <li>Underground metal rebellion</li>
+      <li>Legendary live audience chants</li>
+      <li>Influenced countless heavy bands</li>
+    </ul>
+
+    <button class="audio-btn" onclick="playSong('audio/seekdestroy.mp3')">
+      ♫ Click to Listen
+    </button>
+
+    <div class="credit">
+      Seek and Destroy — Metallica (1983)
+    </div>
   </div>
 </section>
 
 <section id="poison" style="background-image:url('images/poison.jpg')">
   <div class="content">
-    <h2>Poison</h2>
-    <button class="audio-btn" onclick="playSong('audio/crytough.mp3')">Play</button>
+    <h2>Poison — Cry Tough</h2>
+    <h3>1986 • Look What the Cat Dragged In</h3>
+
+    <p>
+      "Cry Tough" captured the determination and street-level ambition that fueled the glam metal movement.
+      The song balanced catchy hooks with rebellious energy, helping Poison break into mainstream rock.
+    </p>
+
+    <ul>
+      <li>Raw early glam metal sound</li>
+      <li>Message of perseverance</li>
+      <li>MTV-era style and charisma</li>
+      <li>Helped define Sunset Strip culture</li>
+    </ul>
+
+    <button class="audio-btn" onclick="playSong('audio/crytough.mp3')">
+      ♫ Click to Listen
+    </button>
+
+    <div class="credit">
+      Cry Tough — Poison (1986)
+    </div>
+  </div>
+</section>
+
+<section id="kix" style="background-image:url('images/kix.jpg')">
+  <div class="content">
+    <h2>Kix — Blow My Fuse</h2>
+    <h3>1988 • Blow My Fuse</h3>
+
+    <p>
+      Kix represented the hardworking side of glam metal with a bluesy, riff-heavy sound built for live performance.
+      "Blow My Fuse" showcases their gritty vocals and authentic hard rock energy.
+    </p>
+
+    <ul>
+      <li>Blues-inspired hard rock</li>
+      <li>Raw, road-tested sound</li>
+      <li>Cult following and underground respect</li>
+      <li>Balanced melody with aggression</li>
+    </ul>
+
+    <button class="audio-btn" onclick="playSong('audio/blowmyfuse.mp3')">
+      ♫ Click to Listen
+    </button>
+
+    <div class="credit">
+      Blow My Fuse — Kix (1988)
+    </div>
+  </div>
+</section>
+
+<section id="warrant" style="background-image:url('images/warrant.jpg')">
+  <div class="content">
+    <h2>Warrant — Heaven</h2>
+    <h3>1989 • Dirty Rotten Filthy Stinking Rich</h3>
+
+    <p>
+      "Heaven" demonstrated the emotional side of glam metal with powerful vocals and polished production.
+      The song became one of the era's defining power ballads.
+    </p>
+
+    <ul>
+      <li>Iconic glam metal ballad</li>
+      <li>Massive radio and MTV success</li>
+      <li>Emotional songwriting</li>
+      <li>Showed glam metal's softer side</li>
+    </ul>
+
+    <button class="audio-btn" onclick="playSong('audio/heaven.mp3')">
+      ♫ Click to Listen
+    </button>
+
+    <div class="credit">
+      Heaven — Warrant (1989)
+    </div>
+  </div>
+</section>
+
+<section id="steelheart" style="background-image:url('images/steelheart.jpg')">
+  <div class="content">
+    <h2>SteelHeart — She's Gone</h2>
+    <h3>1990 • SteelHeart</h3>
+
+    <p>
+      SteelHeart pushed glam metal vocals to extraordinary levels with emotional intensity and technical power.
+      "She's Gone" became known for Miljenko Matijevic's incredible vocal range.
+    </p>
+
+    <ul>
+      <li>Legendary high-range vocals</li>
+      <li>Dramatic emotional delivery</li>
+      <li>Final evolution of glam metal</li>
+      <li>Influenced modern melodic metal singers</li>
+    </ul>
+
+    <button class="audio-btn" onclick="playSong('audio/shesgone.mp3')">
+      ♫ Click to Listen
+    </button>
+
+    <div class="credit">
+      She's Gone — SteelHeart (1990)
+    </div>
   </div>
 </section>
 
 <section id="ozzy" style="background-image:url('images/ozzy.jpg')">
   <div class="content">
-    <h2>Ozzy Osbourne</h2>
-    <button class="audio-btn" onclick="playSong('audio/shotinthedark.mp3')">Play</button>
+    <h2>Ozzy Osbourne — Shot in the Dark</h2>
+    <h3>1986 • The Ultimate Sin</h3>
+
+    <p>
+      As the former frontman of Black Sabbath, Ozzy Osbourne helped pioneer heavy metal before becoming a successful solo artist.
+      "Shot in the Dark" blended dark themes with radio-friendly hooks.
+    </p>
+
+    <ul>
+      <li>Pioneer of heavy metal</li>
+      <li>Dark atmosphere and melody</li>
+      <li>Mainstream crossover success</li>
+      <li>Long-lasting cultural influence</li>
+    </ul>
+
+    <button class="audio-btn" onclick="playSong('audio/shotinthedark.mp3')">
+      ♫ Click to Listen
+    </button>
+
+    <div class="credit">
+      Shot in the Dark — Ozzy Osbourne (1986)
+    </div>
   </div>
 </section>
 
-<footer>
-  © 2026 Essential 80s Metal Playlist
-</footer>
+<section id="zeppelin" style="background-image:url('images/zeppelin.jpg')">
+  <div class="content">
+    <h2>Led Zeppelin — Black Dog</h2>
+    <h3>1971 • Led Zeppelin IV</h3>
 
-</div>
+    <p>
+      Led Zeppelin helped shape the foundation of hard rock and heavy metal through powerful riffs, blues influences and massive live performances.
+      "Black Dog" remains one of rock's most recognizable songs.
+    </p>
+
+    <ul>
+      <li>Heavy blues-rock foundation</li>
+      <li>Influenced future metal bands</li>
+      <li>Iconic guitar and vocal interplay</li>
+      <li>Essential rock history landmark</li>
+    </ul>
+
+    <button class="audio-btn" onclick="playSong('audio/blackdog.mp3')">
+      ♫ Click to Listen
+    </button>
+
+    <div class="credit">
+      Black Dog — Led Zeppelin (1971)
+    </div>
+  </div>
+</section>
 
 <script>
-/* USERS */
-const USERS = {
-  "admin": "root",
-  "kaiden": "tinka",
-  "mcneill": "culminating",
-  "tommylee": "motleycru3"
-};
+  let currentAudio = null;
 
-/* LOGIN */
-function login() {
-  const u = document.getElementById("username").value.trim().toLowerCase();
-  const p = document.getElementById("password").value;
+  function playSong(songPath) {
+    if (currentAudio) {
+      currentAudio.pause();
+      currentAudio.currentTime = 0;
+    }
 
-  if (USERS[u] && USERS[u] === p) {
-    sessionStorage.setItem("auth", u);
-    showSite();
-  } else {
-    location.reload();
+    currentAudio = new Audio(songPath);
+    currentAudio.volume = 0.5;
+    currentAudio.play();
   }
-}
-
-function showSite() {
-  document.getElementById("authOverlay").style.display = "none";
-  document.getElementById("siteContent").style.display = "block";
-}
-
-/* session check (NO infinite reload loop fix) */
-function checkAuth() {
-  const u = sessionStorage.getItem("auth");
-
-  if (USERS[u]) {
-    showSite();
-  }
-}
-
-/* AUDIO */
-let current = null;
-
-function playSong(src) {
-  if (current) {
-    current.pause();
-  }
-
-  current = new Audio(src);
-  current.volume = 0.5;
-  current.play();
-}
-
-/* basic protection */
-document.addEventListener("contextmenu", e => e.preventDefault());
-
-document.addEventListener("keydown", e => {
-  if (
-    e.key === "F12" ||
-    (e.ctrlKey && e.shiftKey && ["I","J","C"].includes(e.key)) ||
-    (e.ctrlKey && e.key === "u")
-  ) {
-    e.preventDefault();
-  }
-});
-
-checkAuth();
 </script>
+<footer style="padding: 60px; background: #050505; color: #aaa; font-size: 0.85rem; line-height: 1.6; border-top: 1px solid rgba(255,255,255,0.08);">
+  <div style="max-width: 900px; margin: 0 auto;">
+    <h2 style="color: white; margin-bottom: 20px; font-size: 1.5rem;">
+      ESSENTIAL 80s METAL PLAYLIST LICENSE AGREEMENT
+    </h2>
 
+    <p>Copyright (c) 2026 Kaiden Fraser.</p>
+    <p>All rights reserved.</p>
+
+    <p>
+      This software, website, source code, design, media, audio integration,
+      branding, layout, assets, and associated materials (collectively referred
+      to as the “Software”) are proprietary and protected under applicable
+      copyright and intellectual property laws.
+    </p>
+
+    <h3 style="margin-top: 20px; color: #ff4d6d;">PERMITTED USE</h3>
+    <p>
+      Permission is granted to access and use the Software solely for personal,
+      non-commercial, authorized use through the official website and approved
+      distribution channels.
+    </p>
+
+    <h3 style="margin-top: 20px; color: #ff4d6d;">RESTRICTIONS</h3>
+    <p>You may NOT, without prior written permission from the copyright owner:</p>
+    <ul>
+      <li>Copy, reproduce, redistribute, republish, or mirror the Software</li>
+      <li>Modify, adapt, reverse engineer, or decompile any portion of the Software</li>
+      <li>Create derivative or competing works</li>
+      <li>Sell, sublicense, rent, lease, or commercially exploit the Software</li>
+      <li>Remove copyright notices or branding</li>
+      <li>Scrape, automate extraction, or harvest content or assets</li>
+      <li>Rehost or redistribute the website or source code</li>
+      <li>Circumvent authentication or access restrictions</li>
+    </ul>
+
+    <h3 style="margin-top: 20px; color: #ff4d6d;">AUTHENTICATION AND ACCESS</h3>
+    <p>
+      Unauthorized access attempts, credential abuse, account sharing,
+      automation, or bypassing access systems are strictly prohibited.
+    </p>
+
+    <h3 style="margin-top: 20px; color: #ff4d6d;">INTELLECTUAL PROPERTY</h3>
+    <p>
+      All ownership rights remain exclusively with the copyright owner.
+      No ownership rights are transferred under this license.
+    </p>
+
+    <h3 style="margin-top: 20px; color: #ff4d6d;">TERMINATION</h3>
+    <p>
+      This license terminates automatically upon violation of any term.
+      All rights cease immediately upon termination.
+    </p>
+
+    <h3 style="margin-top: 20px; color: #ff4d6d;">DISCLAIMER</h3>
+    <p>
+      THE SOFTWARE IS PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND,
+      EXPRESS OR IMPLIED.
+    </p>
+
+    <h3 style="margin-top: 20px; color: #ff4d6d;">LIMITATION OF LIABILITY</h3>
+    <p>
+      IN NO EVENT SHALL THE COPYRIGHT OWNER BE LIABLE FOR ANY DAMAGES
+      ARISING FROM USE OF THE SOFTWARE.
+    </p>
+
+    <h3 style="margin-top: 20px; color: #ff4d6d;">ENFORCEMENT</h3>
+    <p>
+      Unauthorized use may result in legal action, DMCA takedowns,
+      and other enforcement measures permitted by law.
+    </p>
+
+    <h3 style="margin-top: 20px; color: #ff4d6d;">CONTACT</h3>
+    <p>KaidenFraser@gmx.com</p>
+  </div>
+</footer>
 </body>
 </html>
