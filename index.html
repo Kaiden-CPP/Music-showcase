@@ -4,8 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Essential 80s Metal Playlist</title>
-  <link rel='icon' type="image/png" href="favicon.png">
+
+  <link rel="icon" type="image/png" href="favicon.png">
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
   <style>
     * {
       margin: 0;
@@ -19,6 +22,8 @@
       background: #0d0d0d;
       color: white;
       overflow-x: hidden;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
     section {
@@ -139,66 +144,162 @@
       color: #ff4d6d;
     }
 
+    footer {
+      background: #000;
+      padding: 40px;
+      text-align: center;
+      color: #888;
+    }
+
+    footer a {
+      color: #ff4d6d;
+      text-decoration: none;
+    }
+
+    #authOverlay {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      z-index: 999999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .auth-box {
+      width: 420px;
+      background: rgba(15,15,15,0.95);
+      padding: 40px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.08);
+      text-align: center;
+      box-shadow: 0 0 40px rgba(0,0,0,0.6);
+    }
+
+    .auth-box input {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 14px;
+      border-radius: 12px;
+      border: none;
+      background: #1b1b1b;
+      color: white;
+      font-size: 1rem;
+    }
+
+    .auth-box button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg,#ff4d6d,#ff758f);
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    .watermark {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 80px;
+      opacity: 0.03;
+      pointer-events: none;
+      transform: rotate(-30deg);
+      z-index: 1;
+    }
+
+    #eulaModal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 9999999;
+      overflow: auto;
+    }
+
+    .eula-content {
+      max-width: 900px;
+      margin: 60px auto;
+      background: #111;
+      padding: 40px;
+      border-radius: 20px;
+    }
+
     @keyframes fadeIn {
       from {
         opacity: 0;
         transform: translateY(20px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
 
-    @media(max-width: 900px) {
+    @media(max-width:900px) {
       h1 {
-        font-size: 2.8rem;
+        font-size: 2.5rem;
       }
 
       h2 {
         font-size: 2rem;
       }
 
-      section {
-        padding: 20px;
-      }
-
       .content {
         padding: 30px;
+      }
+
+      section {
+        padding: 20px;
       }
     }
   </style>
 </head>
+
 <body>
+
+<div class="watermark">
+  LICENSED ACCESS
+</div>
+
+<div id="authOverlay">
+  <div class="auth-box">
+    <h1>Member Access</h1>
+
+    <p style="margin-bottom:20px;color:#aaa;">
+      Sign in to access the licensed playlist experience.
+    </p>
+
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+
+    <button onclick="login()">Login</button>
+    <button onclick="signup()">Create Account</button>
+  </div>
+</div>
 
 <nav>
   <a href="#home">Home</a>
   <a href="#motley">Mötley Crüe</a>
-  <a href="#hanoi">Hanoi Rocks</a>
-  <a href="#vanhalen">Van Halen</a>
   <a href="#metallica">Metallica</a>
   <a href="#poison">Poison</a>
-  <a href="#kix">Kix</a>
-  <a href="#warrant">Warrant</a>
-  <a href="#steelheart">SteelHeart</a>
   <a href="#ozzy">Ozzy</a>
-  <a href="#zeppelin">Led Zeppelin</a>
 </nav>
 
 <section id="home" style="background-image:url('images/home.jpg')">
   <div class="content">
     <h1>Essential 80s Metal Playlist</h1>
+
     <h3>Glam Metal • Hard Rock • Heavy Metal</h3>
 
     <p>
-      The 1980s marked a major evolution in popular music with the rise of glam metal,
-      blending heavy guitar riffs, pop melodies, flamboyant fashion and unforgettable hooks.
-      Bands like Mötley Crüe, Poison and Cinderella transformed hard rock into a global movement.
-    </p>
-
-    <p>
-      Beyond entertainment, these artists represented rebellion, individuality and larger-than-life performance.
-      Their music continues to influence modern rock and remains essential to understanding the evolution of heavy music.
+      The 1980s transformed rock music forever through glam metal,
+      heavy riffs and unforgettable stage presence.
     </p>
 
     <button class="audio-btn" onclick="playSong('audio/nightsongs.mp3')">
@@ -206,294 +307,204 @@
     </button>
 
     <div class="credit">
-      Night Songs - Cinderella (1986)
+      Night Songs — Cinderella (1986)
     </div>
   </div>
 </section>
 
 <section id="motley" style="background-image:url('images/motley.jpg')">
   <div class="content">
-    <h2>Mötley Crüe - Merry-Go-Round</h2>
+    <h2>Mötley Crüe — Merry-Go-Round</h2>
+
     <h3>1981 • Too Fast for Love</h3>
 
     <p>
-      "Merry-Go-Round" revealed an emotional and reflective side of Mötley Crüe before the band became global superstars.
-      Combining haunting melodies with raw glam metal energy, the song stood apart from the band's wild reputation.
+      One of the darker and more emotional early glam metal tracks.
     </p>
-
-    <ul>
-      <li>Emotional storytelling</li>
-      <li>Dark atmospheric guitar work</li>
-      <li>Early example of glam metal depth</li>
-      <li>Helped establish the Sunset Strip sound</li>
-    </ul>
 
     <button class="audio-btn" onclick="playSong('audio/merrygoround.mp3')">
       ♫ Click to Listen
     </button>
-
-    <div class="credit">
-      Merry-Go-Round - Mötley Crüe (1981)
-    </div>
-  </div>
-</section>
-
-<section id="hanoi" style="background-image:url('images/hanoi.jpg')">
-  <div class="content">
-    <h2>Hanoi Rocks - Don't You Ever Leave Me</h2>
-    <h3>1983 • Back to Mystery City</h3>
-
-    <p>
-      Hanoi Rocks fused glam rock, punk attitude and dangerous energy into a sound that heavily influenced future hair metal bands.
-      Their style and swagger shaped the image of 1980s glam before the genre exploded commercially.
-    </p>
-
-    <ul>
-      <li>Catchy hooks and gritty guitar tones</li>
-      <li>Strong punk influence</li>
-      <li>Inspired Guns N' Roses and many glam bands</li>
-      <li>Cult status after the death of drummer Razzle</li>
-    </ul>
-
-    <button class="audio-btn" onclick="playSong('audio/hanoi.mp3')">
-      ♫ Click to Listen
-    </button>
-
-    <div class="credit">
-      Don't You Ever Leave Me - Hanoi Rocks (1983)
-    </div>
-  </div>
-</section>
-
-<section id="vanhalen" style="background-image:url('images/vanhalen.jpg')">
-  <div class="content">
-    <h2>Van Halen - Runnin' with the Devil</h2>
-    <h3>1978 • Van Halen</h3>
-
-    <p>
-      Although released in the late 1970s, this track laid the groundwork for the guitar-driven excess of the 1980s.
-      Eddie Van Halen's revolutionary playing style changed rock music forever.
-    </p>
-
-    <ul>
-      <li>Innovative guitar techniques</li>
-      <li>High-energy performance style</li>
-      <li>Blueprint for shred guitar</li>
-      <li>Redefined hard rock showmanship</li>
-    </ul>
-
-    <button class="audio-btn" onclick="playSong('audio/runnin.mp3')">
-      ♫ Click to Listen
-    </button>
-
-    <div class="credit">
-      Runnin' with the Devil - Van Halen (1978)
-    </div>
   </div>
 </section>
 
 <section id="metallica" style="background-image:url('images/metallica.jpg')">
   <div class="content">
-    <h2>Metallica - Seek and Destroy</h2>
+    <h2>Metallica — Seek and Destroy</h2>
+
     <h3>1983 • Kill 'Em All</h3>
 
     <p>
-      "Seek and Destroy" introduced the raw aggression of thrash metal to a new generation.
-      Its speed, intensity and rebellious spirit contrasted sharply with polished pop-metal bands of the era.
+      Aggressive thrash metal energy that changed heavy music forever.
     </p>
-
-    <ul>
-      <li>Fast, aggressive riffing</li>
-      <li>Underground metal rebellion</li>
-      <li>Legendary live audience chants</li>
-      <li>Influenced countless heavy bands</li>
-    </ul>
 
     <button class="audio-btn" onclick="playSong('audio/seekdestroy.mp3')">
       ♫ Click to Listen
     </button>
-
-    <div class="credit">
-      Seek and Destroy - Metallica (1983)
-    </div>
   </div>
 </section>
 
 <section id="poison" style="background-image:url('images/poison.jpg')">
   <div class="content">
-    <h2>Poison - Cry Tough</h2>
+    <h2>Poison — Cry Tough</h2>
+
     <h3>1986 • Look What the Cat Dragged In</h3>
 
     <p>
-      "Cry Tough" captured the determination and street-level ambition that fueled the glam metal movement.
-      The song balanced catchy hooks with rebellious energy, helping Poison break into mainstream rock.
+      A defining Sunset Strip glam metal anthem.
     </p>
-
-    <ul>
-      <li>Raw early glam metal sound</li>
-      <li>Message of perseverance</li>
-      <li>MTV-era style and charisma</li>
-      <li>Helped define Sunset Strip culture</li>
-    </ul>
 
     <button class="audio-btn" onclick="playSong('audio/crytough.mp3')">
       ♫ Click to Listen
     </button>
-
-    <div class="credit">
-      Cry Tough - Poison (1986)
-    </div>
-  </div>
-</section>
-
-<section id="kix" style="background-image:url('images/kix.jpg')">
-  <div class="content">
-    <h2>Kix - Blow My Fuse</h2>
-    <h3>1988 • Blow My Fuse</h3>
-
-    <p>
-      Kix represented the hardworking side of glam metal with a bluesy, riff-heavy sound built for live performance.
-      "Blow My Fuse" showcases their gritty vocals and authentic hard rock energy.
-    </p>
-
-    <ul>
-      <li>Blues-inspired hard rock</li>
-      <li>Raw, road-tested sound</li>
-      <li>Cult following and underground respect</li>
-      <li>Balanced melody with aggression</li>
-    </ul>
-
-    <button class="audio-btn" onclick="playSong('audio/blowmyfuse.mp3')">
-      ♫ Click to Listen
-    </button>
-
-    <div class="credit">
-      Blow My Fuse - Kix (1988)
-    </div>
-  </div>
-</section>
-
-<section id="warrant" style="background-image:url('images/warrant.jpg')">
-  <div class="content">
-    <h2>Warrant - Heaven</h2>
-    <h3>1989 • Dirty Rotten Filthy Stinking Rich</h3>
-
-    <p>
-      "Heaven" demonstrated the emotional side of glam metal with powerful vocals and polished production.
-      The song became one of the era's defining power ballads.
-    </p>
-
-    <ul>
-      <li>Iconic glam metal ballad</li>
-      <li>Massive radio and MTV success</li>
-      <li>Emotional songwriting</li>
-      <li>Showed glam metal's softer side</li>
-    </ul>
-
-    <button class="audio-btn" onclick="playSong('audio/heaven.mp3')">
-      ♫ Click to Listen
-    </button>
-
-    <div class="credit">
-      Heaven - Warrant (1989)
-    </div>
-  </div>
-</section>
-
-<section id="steelheart" style="background-image:url('images/steelheart.jpg')">
-  <div class="content">
-    <h2>SteelHeart - She's Gone</h2>
-    <h3>1990 • SteelHeart</h3>
-
-    <p>
-      SteelHeart pushed glam metal vocals to extraordinary levels with emotional intensity and technical power.
-      "She's Gone" became known for Miljenko Matijevic's incredible vocal range.
-    </p>
-
-    <ul>
-      <li>Legendary high-range vocals</li>
-      <li>Dramatic emotional delivery</li>
-      <li>Final evolution of glam metal</li>
-      <li>Influenced modern melodic metal singers</li>
-    </ul>
-
-    <button class="audio-btn" onclick="playSong('audio/shesgone.mp3')">
-      ♫ Click to Listen
-    </button>
-
-    <div class="credit">
-      She's Gone - SteelHeart (1990)
-    </div>
   </div>
 </section>
 
 <section id="ozzy" style="background-image:url('images/ozzy.jpg')">
   <div class="content">
-    <h2>Ozzy Osbourne - Shot in the Dark</h2>
+    <h2>Ozzy Osbourne — Shot in the Dark</h2>
+
     <h3>1986 • The Ultimate Sin</h3>
 
     <p>
-      As the former frontman of Black Sabbath, Ozzy Osbourne helped pioneer heavy metal before becoming a successful solo artist.
-      "Shot in the Dark" blended dark themes with radio-friendly hooks.
+      Dark atmosphere mixed with massive hooks and classic heavy metal energy.
     </p>
-
-    <ul>
-      <li>Pioneer of heavy metal</li>
-      <li>Dark atmosphere and melody</li>
-      <li>Mainstream crossover success</li>
-      <li>Long-lasting cultural influence</li>
-    </ul>
 
     <button class="audio-btn" onclick="playSong('audio/shotinthedark.mp3')">
       ♫ Click to Listen
     </button>
-
-    <div class="credit">
-      Shot in the Dark - Ozzy Osbourne (1986)
-    </div>
   </div>
 </section>
 
-<section id="zeppelin" style="background-image:url('images/zeppelin.jpg')">
-  <div class="content">
-    <h2>Led Zeppelin - Black Dog</h2>
-    <h3>1971 • Led Zeppelin IV</h3>
+<footer>
+  <p>© 2026 Essential 80s Metal Playlist</p>
+
+  <p style="margin-top:10px;">
+    Unauthorized reproduction, redistribution, scraping,
+    or resale of this website or its assets is prohibited.
+  </p>
+
+  <p style="margin-top:14px;">
+    <a href="#" onclick="openEULA()">
+      End User License Agreement
+    </a>
+  </p>
+</footer>
+
+<div id="eulaModal">
+  <div class="eula-content">
+
+    <h1 style="font-size:2rem;margin-bottom:20px;">
+      END USER LICENSE AGREEMENT
+    </h1>
 
     <p>
-      Led Zeppelin helped shape the foundation of hard rock and heavy metal through powerful riffs, blues influences and massive live performances.
-      "Black Dog" remains one of rock's most recognizable songs.
+      By accessing this website, you agree not to reproduce,
+      redistribute, scrape, reverse engineer, or commercially
+      exploit any portion of this website without permission.
     </p>
 
-    <ul>
-      <li>Heavy blues-rock foundation</li>
-      <li>Influenced future metal bands</li>
-      <li>Iconic guitar and vocal interplay</li>
-      <li>Essential rock history landmark</li>
-    </ul>
+    <p>
+      All code, branding, media, and design elements are protected
+      under applicable copyright law.
+    </p>
 
-    <button class="audio-btn" onclick="playSong('audio/blackdog.mp3')">
-      ♫ Click to Listen
+    <p>
+      Access may be revoked at any time for violations of these terms.
+    </p>
+
+    <button class="audio-btn" onclick="closeEULA()">
+      Close
     </button>
 
-    <div class="credit">
-      Black Dog - Led Zeppelin (1971)
-    </div>
   </div>
-</section>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 
 <script>
-  let currentAudio = null;
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  appId: "YOUR_APP_ID"
+};
 
-  function playSong(songPath) {
-    if (currentAudio) {
-      currentAudio.pause();
-      currentAudio.currentTime = 0;
-    }
+firebase.initializeApp(firebaseConfig);
 
-    currentAudio = new Audio(songPath);
-    currentAudio.volume = 0.5;
-    currentAudio.play();
+const auth = firebase.auth();
+
+function signup() {
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+
+  auth.createUserWithEmailAndPassword(email, password)
+    .then(() => {
+      alert("Account created.");
+    })
+    .catch(error => {
+      alert(error.message);
+    });
+}
+
+function login() {
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+
+  auth.signInWithEmailAndPassword(email, password)
+    .then(() => {
+      document.getElementById('authOverlay').style.display = 'none';
+    })
+    .catch(error => {
+      alert(error.message);
+    });
+}
+
+auth.onAuthStateChanged(user => {
+  if (user) {
+    document.getElementById('authOverlay').style.display = 'none';
+  } else {
+    document.getElementById('authOverlay').style.display = 'flex';
   }
+});
+
+let currentAudio = null;
+
+function playSong(songPath) {
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+  }
+
+  currentAudio = new Audio(songPath);
+  currentAudio.volume = 0.5;
+  currentAudio.play();
+}
+
+function openEULA() {
+  document.getElementById('eulaModal').style.display = 'block';
+}
+
+function closeEULA() {
+  document.getElementById('eulaModal').style.display = 'none';
+}
+
+document.addEventListener('contextmenu', e => e.preventDefault());
+
+document.addEventListener('keydown', function(e) {
+  if (
+    e.key === 'F12' ||
+    (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key)) ||
+    (e.ctrlKey && e.key === 'u')
+  ) {
+    e.preventDefault();
+  }
+});
+
+document.querySelectorAll('img').forEach(img => {
+  img.addEventListener('dragstart', e => e.preventDefault());
+});
 </script>
 
 </body>
